@@ -1,25 +1,14 @@
+import { createStore } from "redux";
+
 const add = document.getElementById("add");
 const minus = document.getElementById("minus");
 const number = document.querySelector("span");
 
-let count = 0;
-
-number.innerText = count;
-
-// repaint 역할을 하는 함수
-const updateText = (count) => {
-  number.innerText = count;
+// 리듀서 : 함수 상태의 Modifier == Setter, set 함수
+// state = 0 : 인자 state 값이 undefined 이면 0 할당, 초기화
+const countModifier = (count = 0) => {
+  return count;
 };
 
-const handleAdd = () => {
-  count += 1;
-  updateText(count); // 리페인트 함수 호출
-};
-
-const handleMinus = () => {
-  count -= 1;
-  updateText(count); // 리페인트 함수 호출
-};
-
-add.addEventListener("click", handleAdd);
-minus.addEventListener("click", handleMinus);
+const countStore = createStore(countModifier);
+console.log(countStore.getState());
